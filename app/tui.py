@@ -2,16 +2,29 @@
 
 import npyscreen
 
-def myFunction(*args) -> str:
-    # name='My Test Application' es el título de la ventana.
-    F = npyscreen.Form(name='SimVIM')
 
-    title_text = F.add(npyscreen.TitleText, name="First Widget")
-    
-    # Con esto lo hacemos editable. También se pudiera usar F.display, pero el comportamiento que deseamos es que este form sea editable.
+class myEmployeeForm(npyscreen.Form):
+    def create(self):
+        # Al parecer este super().create no es necesario, pero uno nunca sabe.
+        # La descripción del método sugiere que se sobreescriba para crear los widgets ahí. NPI.
+        super(myEmployeeForm, self).create()
+
+        # Este crea un label con input con nombre 'Name'
+        self.myName = self.add(npyscreen.TitleText, name='Name')
+
+        # Este crea un label con input con nombre 'Department'
+        self.myDepartment = self.add(npyscreen.TitleText, name='Department')
+
+        # Este crea un input con calendario llamado 'Date Employed'
+        self.myDate = self.add(npyscreen.TitleDateCombo, name='Date Employed')
+
+# Se crea una función, que se encarga de hacer toda la magia con las ventanas y tal. Como si fuera el main(), más o menos.
+# Este *args no se puede remover, crashea.
+def myFunction(*args):
+    F = myEmployeeForm(name = 'New Employee')
     F.edit()
-
-    return title_text.value
+    return f'Created record for {F.myName.value}'
 
 if __name__ == '__main__':
+    # Y se llama usando el wrapper_basic este.
     print(npyscreen.wrapper_basic(myFunction))
