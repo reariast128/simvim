@@ -20,3 +20,5 @@ if __name__ == '__main__':
     '''Y en vez de usar el basic_wrapper() para ejecutar la aplicación se usa el MyApplication().run'''
     TestApp = MyApplication().run()
     print("All objects, baby.")
+
+    print("yolo")
