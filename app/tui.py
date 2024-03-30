@@ -12,18 +12,24 @@ class myEmployeeForm(npyscreen.Form):
         # Este crea un label con input con nombre 'Name'
         self.myName = self.add(npyscreen.TitleText, name='Name')
 
-        # Este crea un label con input con nombre 'Department'
-        self.myDepartment = self.add(npyscreen.TitleText, name='Department')
+        # Ahora esto es una lista de selección.
+        self.myDepartment = self.add(npyscreen.TitleSelectOne, max_height=3,
+                                     name='Department',
+                                     values=['Department 1',
+                                             'Department 2', 'Department 3'],
+                                     scroll_exit=True  # Esto permite que el usuario se pueda salir del widget.
+                                     )
 
         # Este crea un input con calendario llamado 'Date Employed'
         self.myDate = self.add(npyscreen.TitleDateCombo, name='Date Employed')
 
-# Se crea una función, que se encarga de hacer toda la magia con las ventanas y tal. Como si fuera el main(), más o menos.
-# Este *args no se puede remover, crashea.
 def myFunction(*args):
-    F = myEmployeeForm(name = 'New Employee')
+    '''Se crea una función, que se encarga de hacer toda la magia con las ventanas y tal. Como si fuera el main(), más o menos.
+        Este *args no se puede remover, crashea.'''
+    F = myEmployeeForm(name='New Employee')
     F.edit()
     return f'Created record for {F.myName.value}'
+
 
 if __name__ == '__main__':
     # Y se llama usando el wrapper_basic este.
