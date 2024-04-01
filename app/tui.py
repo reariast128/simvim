@@ -3,6 +3,11 @@ import npyscreen
 
 class myEmployeeForm(npyscreen.Form):
     '''Se crea un Form que va a contener todos los widgets.'''
+
+    def afterEditing(self):
+        '''Se sobreescribe este método para poder salir de la aplicación con el botón "Ok"'''
+        self.parentApp.setNextForm(None)
+
     def create(self):
         self.myName = self.add(npyscreen.TitleText, name='Name')
         self.myDepartment = self.add(npyscreen.TitleSelectOne, scroll_exit=True, max_height=3, name='Department', values=[
@@ -18,7 +23,5 @@ class MyApplication(npyscreen.NPSAppManaged):
 
 if __name__ == '__main__':
     '''Y en vez de usar el basic_wrapper() para ejecutar la aplicación se usa el MyApplication().run'''
-    TestApp = MyApplication().run()
-    print("All objects, baby.")
-
-    print("yolo")
+    TestApp = MyApplication()
+    TestApp.run()
